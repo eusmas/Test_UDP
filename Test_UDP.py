@@ -24,5 +24,3 @@ print(f"Mensaje enviado a {UDP_IP}:{UDP_PORT}")
 sock.close()
 
 #asd
-
-Trama3 = b"Hola desde Python21!"
