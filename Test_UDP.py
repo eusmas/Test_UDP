@@ -22,3 +22,7 @@ print(f"Mensaje enviado a {UDP_IP}:{UDP_PORT}")
 
 # Cerrar el socket
 sock.close()
+
+#asd
+
+Trama3 = b"Hola desde Python21!"
