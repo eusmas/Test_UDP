@@ -17,7 +17,6 @@ for x in range(100):
     sock.sendto(Fosber.encode(encoding="utf-8"), (UDP_IP, UDP_PORT))
     time.sleep(T_Espera)
 
-
 print(f"Mensaje enviado a {UDP_IP}:{UDP_PORT}")
 # Cerrar el socket
 sock.close()
