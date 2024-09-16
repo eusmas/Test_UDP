@@ -1,0 +1,101 @@
+#F := 0;
+#E := 0;
+IF #Habilitar = 1 THEN
+    
+    FOR #K := 0 TO 499 DO
+        #N_Vector[#K] := ' ';
+    END_FOR;
+    
+    FOR #J := 1 TO 499 DO
+        IF #Vector[#J] <> '$02' THEN
+            IF #Vector[#J] <> '$03' THEN
+                IF #Vector[#J] <> '$16' THEN
+                    #N_Vector[#J] := #Vector[#J];
+                END_IF;
+            END_IF;
+        END_IF;
+        
+        IF #Vector[#J] = '$16' THEN
+            #N_Vector[#J] := '+';
+        END_IF;
+        
+        IF #Vector[#J] = '$03' THEN
+            #E := 1;
+        END_IF;
+        
+        IF #E <> 1 THEN
+            #F += 1;
+        END_IF;
+        
+    END_FOR;
+   
+    
+    #V_resp[0] := '$02';
+    #V_resp[1] := #N_Vector[1];
+    #V_resp[2] := #N_Vector[2];
+    #V_resp[3] := 'l';
+    #V_resp[4] := 'p';
+    #V_resp[5] := 'd';
+    #V_resp[6] := #c1;
+    #V_resp[7] := #c2;
+    #V_resp[8] := '$03';
+    
+    #CAB_1[0] := CHAR_TO_BYTE(#Vector[0]);
+    #CAB_1[1] := CHAR_TO_BYTE(#Vector[1]);
+    #CAB_1[2] := CHAR_TO_BYTE(#Vector[2]);
+    #CAB_1[3] := CHAR_TO_BYTE('l');
+    #CAB_1[4] := CHAR_TO_BYTE('p');
+    #CAB_1[5] := CHAR_TO_BYTE('d');
+    
+    #v1 := BYTE_TO_INT(#CSum);
+    #v2 := #v1 / 16;
+    #v3 := #v1 - (#v2 * 16);
+    CASE #v2 OF
+        1:  #c1 := '1';
+        2:  #c1 := '2';
+        3:  #c1 := '3';
+        4:  #c1 := '4';
+        5:  #c1 := '5';
+        6:  #c1 := '6';
+        7:  #c1 := '7';
+        8:  #c1 := '8';
+        9:  #c1 := '9';
+        10: #c1 := 'A';
+        11: #c1 := 'B';
+        12: #c1 := 'C';
+        13: #c1 := 'D';
+        14: #c1 := 'E';
+        15: #c1 := 'F';
+        ELSE
+            #c1 := '0';
+    END_CASE;
+    CASE #v3 OF
+        1:  #c2 := '1';
+        2:  #c2 := '2';
+        3:  #c2 := '3';
+        4:  #c2 := '4';
+        5:  #c2 := '5';
+        6:  #c2 := '6';
+        7:  #c2 := '7';
+        8:  #c2 := '8';
+        9:  #c2 := '9';
+        10: #c2 := 'A';
+        11: #c2 := 'B';
+        12: #c2 := 'C';
+        13: #c2 := 'D';
+        14: #c2 := 'E';
+        15: #c2 := 'F';
+        ELSE
+            #c2 := '0';
+    END_CASE;
+    #CSum := 0;
+    FOR #I := 0 TO 5 DO
+        #CSum := #CSum XOR #CAB_1[#I];
+    END_FOR;
+    
+    IF #T_Envio.Q = TRUE THEN
+        FOR #Z := 0 TO 499 DO
+            #Vector[#Z] := ' ';
+        END_FOR;
+    END_IF;
+END_IF;
